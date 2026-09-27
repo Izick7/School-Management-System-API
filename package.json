@@ -1,14 +1,20 @@
 {
   "name": "school-management-system-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "REST API for a School Management System",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
-  "keywords": [],
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest-api",
+    "school-management"
+  ],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^18.0.4",
@@ -19,10 +25,5 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
-  },
-
-  "scripts": {
-  "start": "node src/server.js",
-  "dev": "nodemon src/server.js"
-}
+  }
 }

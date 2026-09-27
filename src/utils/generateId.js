@@ -1,5 +1,7 @@
+const crypto = require("crypto");
+
 const generateId = () => {
-    return Date.now().toString();
+    return crypto.randomUUID();
 };
 
 module.exports = generateId;
