@@ -1,6 +1,7 @@
 const express = require("express");
 const authRoutes = require("./routes/authRoutes");
 const errorHandler = require("./middleware/errorHandler");
+const studentRoutes = require("./routes/studentRoutes");
 
 
 const app = express();
@@ -13,6 +14,8 @@ app.get("/", (req, res) => {
         message: "School Management API is running"
     });
 });
+
+app.use("/api/students", studentRoutes);
 
 app.use("/api/auth", authRoutes);
 
