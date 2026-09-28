@@ -1,4 +1,7 @@
 const express = require("express");
+const authRoutes = require("./routes/authRoutes");
+const errorHandler = require("./middleware/errorHandler");
+
 
 const app = express();
 
@@ -11,14 +14,14 @@ app.get("/", (req, res) => {
     });
 });
 
+app.use("/api/auth", authRoutes);
+
 app.use((req, res) => {
     res.status(404).json({
         success: false,
         message: "Route not found"
     });
 });
-
-const errorHandler = require("./middleware/errorHandler");
 
 app.use(errorHandler);
 
