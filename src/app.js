@@ -2,7 +2,7 @@ const express = require("express");
 const authRoutes = require("./routes/authRoutes");
 const errorHandler = require("./middleware/errorHandler");
 const studentRoutes = require("./routes/studentRoutes");
-
+const classRoutes = require("./routes/classRoutes");
 
 const app = express();
 
@@ -16,8 +16,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/students", studentRoutes);
-
 app.use("/api/auth", authRoutes);
+app.use("/api/classes", classRoutes);
 
 app.use((req, res) => {
     res.status(404).json({
