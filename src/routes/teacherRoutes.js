@@ -1,20 +1,20 @@
 const express = require("express");
 
 const {
-    createClass,
-    getClasses,
-    getClass,
-    updateClass,
-    deleteClass
-} = require("../controllers/classController");
+    createTeacher,
+    getTeachers,
+    getTeacher,
+    updateTeacher,
+    deleteTeacher
+} = require("../controllers/teacherController");
 
 const authenticate = require("../middleware/auth");
 const authorize = require("../middleware/authorize");
 const validate = require("../middleware/validate");
 const {
-    createClassValidator,
-    updateClassValidator
-} = require("../validators/classValidator");
+    createTeacherValidator,
+    updateTeacherValidator
+} = require("../validators/teacherValidator");
 const { idParamValidator } = require("../validators/commonValidator");
 
 const router = express.Router();
@@ -24,32 +24,32 @@ router.use(authenticate);
 router.post(
     "/",
     authorize("admin"),
-    createClassValidator,
+    createTeacherValidator,
     validate,
-    createClass
+    createTeacher
 );
 
 router.get(
     "/",
-    authorize("admin", "teacher", "student"),
-    getClasses
+    authorize("admin", "teacher"),
+    getTeachers
 );
 
 router.get(
     "/:id",
-    authorize("admin", "teacher", "student"),
+    authorize("admin", "teacher"),
     idParamValidator,
     validate,
-    getClass
+    getTeacher
 );
 
 router.put(
     "/:id",
     authorize("admin"),
     idParamValidator,
-    updateClassValidator,
+    updateTeacherValidator,
     validate,
-    updateClass
+    updateTeacher
 );
 
 router.delete(
@@ -57,7 +57,7 @@ router.delete(
     authorize("admin"),
     idParamValidator,
     validate,
-    deleteClass
+    deleteTeacher
 );
 
 module.exports = router;

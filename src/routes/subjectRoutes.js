@@ -1,20 +1,20 @@
 const express = require("express");
 
 const {
-    createClass,
-    getClasses,
-    getClass,
-    updateClass,
-    deleteClass
-} = require("../controllers/classController");
+    createSubject,
+    getSubjects,
+    getSubject,
+    updateSubject,
+    deleteSubject
+} = require("../controllers/subjectController");
 
 const authenticate = require("../middleware/auth");
 const authorize = require("../middleware/authorize");
 const validate = require("../middleware/validate");
 const {
-    createClassValidator,
-    updateClassValidator
-} = require("../validators/classValidator");
+    createSubjectValidator,
+    updateSubjectValidator
+} = require("../validators/subjectValidator");
 const { idParamValidator } = require("../validators/commonValidator");
 
 const router = express.Router();
@@ -24,15 +24,15 @@ router.use(authenticate);
 router.post(
     "/",
     authorize("admin"),
-    createClassValidator,
+    createSubjectValidator,
     validate,
-    createClass
+    createSubject
 );
 
 router.get(
     "/",
     authorize("admin", "teacher", "student"),
-    getClasses
+    getSubjects
 );
 
 router.get(
@@ -40,16 +40,16 @@ router.get(
     authorize("admin", "teacher", "student"),
     idParamValidator,
     validate,
-    getClass
+    getSubject
 );
 
 router.put(
     "/:id",
     authorize("admin"),
     idParamValidator,
-    updateClassValidator,
+    updateSubjectValidator,
     validate,
-    updateClass
+    updateSubject
 );
 
 router.delete(
@@ -57,7 +57,7 @@ router.delete(
     authorize("admin"),
     idParamValidator,
     validate,
-    deleteClass
+    deleteSubject
 );
 
 module.exports = router;

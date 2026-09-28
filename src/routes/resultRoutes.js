@@ -1,23 +1,22 @@
 const express = require("express");
 
 const {
-    createStudent,
-    getStudents,
-    getMyProfile,
-    getMyClass,
-    getStudent,
-    updateStudent,
-    deleteStudent
-} = require("../controllers/studentController");
+    createResult,
+    getResults,
+    getMyResults,
+    getResult,
+    updateResult,
+    deleteResult
+} = require("../controllers/resultController");
 
 const authenticate = require("../middleware/auth");
 const authorize = require("../middleware/authorize");
 const validate = require("../middleware/validate");
 const loadStudent = require("../middleware/loadStudent");
 const {
-    createStudentValidator,
-    updateStudentValidator
-} = require("../validators/studentValidator");
+    createResultValidator,
+    updateResultValidator
+} = require("../validators/resultValidator");
 const { idParamValidator } = require("../validators/commonValidator");
 
 const router = express.Router();
@@ -26,30 +25,23 @@ router.use(authenticate);
 
 router.post(
     "/",
-    authorize("admin"),
-    createStudentValidator,
+    authorize("admin", "teacher"),
+    createResultValidator,
     validate,
-    createStudent
+    createResult
 );
 
 router.get(
     "/",
     authorize("admin", "teacher"),
-    getStudents
+    getResults
 );
 
 router.get(
     "/me",
     authorize("student"),
     loadStudent,
-    getMyProfile
-);
-
-router.get(
-    "/me/class",
-    authorize("student"),
-    loadStudent,
-    getMyClass
+    getMyResults
 );
 
 router.get(
@@ -57,16 +49,16 @@ router.get(
     authorize("admin", "teacher"),
     idParamValidator,
     validate,
-    getStudent
+    getResult
 );
 
 router.put(
     "/:id",
-    authorize("admin"),
+    authorize("admin", "teacher"),
     idParamValidator,
-    updateStudentValidator,
+    updateResultValidator,
     validate,
-    updateStudent
+    updateResult
 );
 
 router.delete(
@@ -74,7 +66,7 @@ router.delete(
     authorize("admin"),
     idParamValidator,
     validate,
-    deleteStudent
+    deleteResult
 );
 
 module.exports = router;

@@ -66,6 +66,39 @@ const getStudents = (req, res, next) => {
     }
 };
 
+const getMyProfile = (req, res, next) => {
+    try {
+        res.json({
+            success: true,
+            message: "Profile retrieved successfully",
+            data: req.student
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getMyClass = (req, res, next) => {
+    try {
+        const myClass = classes.find(cls => cls.id === req.student.classId);
+
+        if (!myClass) {
+            return res.status(404).json({
+                success: false,
+                message: "Class not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Class retrieved successfully",
+            data: myClass
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 const getStudent = (req, res, next) => {
     try {
         const student = students.find(
@@ -159,6 +192,8 @@ const deleteStudent = (req, res, next) => {
 module.exports = {
     createStudent,
     getStudents,
+    getMyProfile,
+    getMyClass,
     getStudent,
     updateStudent,
     deleteStudent
